@@ -29,16 +29,16 @@ Firstly, create an annotated configuration interface (Octodubstep will create in
 public interface MyConfigProperties {
   
   @ConfigProperty(name = "my.string.property", defaultValue="foobar")
-  ConfigPropertyValue<String> myStringProperty();
+  Value<String> myStringProperty();
   
   @ConfigProperty(name = "my.integer.property")
-  ConfigPropertyValue<Integer> myIntegerProperty();  
+  Value<Integer> myIntegerProperty();  
   
   @ConfigProperty(name = "my.list.property", required="true")
-  ConfigPropertyValue<List<String>> myListProperty();
+  Value<List<String>> myListProperty();
   
   @ConfigProperty(name = "my.dynamic.string.property")
-  DynamicConfigPropertyValue<String> myDynamicStringProperty();
+  DynamicValue<String> myDynamicStringProperty();
 }
 ```
 Then, let's see how this can be used in other code:
@@ -48,8 +48,8 @@ public class ConfigTester {
   
   private MyConfigProperties properties;
   
-  public ConfigTest(ConfigPropertyManager manager) {
-    properties = manager.getConfigProvider(MyConfigProperties.class);
+  public ConfigTest(PropertyManager manager) {
+    properties = manager.propertiesFor(MyConfigProperties.class);
   }
   
   public void doStuff() {
