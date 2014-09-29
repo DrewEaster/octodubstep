@@ -22,10 +22,26 @@ I'm working hard on pretty thorough documentation - watch this space!
 A short example
 ---------------
 
-For those who can't wait for the docs, this is just a very basic example of Octodubstep in use (in Java):
-```java
+For those who can't wait for the docs, this is just a very basic example of Octodubstep in use (in Java).
 
+Firstly, create an annotated configuration interface (Octodubstep will create instance automagically).
+```java
+public interface MyConfigProperties {
+  
+  @ConfigProperty(name = "my.string.property", defaultValue="foobar")
+  ConfigPropertyValue<String> myStringProperty();
+  
+  @ConfigProperty(name = "my.integer.property")
+  ConfigPropertyValue<Integer> myIntegerProperty();  
+  
+  @ConfigProperty(name = "my.list.property", required="true")
+  ConfigPropertyValue<List<String>> myListProperty();
+  
+  @ConfigProperty(name = "my.dynamic.string.property")
+  DynamicConfigPropertyValue<String> myDynamicStringProperty();
+}
 ```
+
 License
 -------
 
