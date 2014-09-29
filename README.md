@@ -1,5 +1,5 @@
-Octodubstep
-===========
+Octodubstep (Alpha)
+===================
 
 A declarative, type safe configuration property management framework for the JVM. Written in Java but can be used in Scala applications too!
 
@@ -57,6 +57,10 @@ public class ConfigTester {
   }
 }
 ```
+Can I use it?
+-------------
+
+I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-)
 
 License
 -------
