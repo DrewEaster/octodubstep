@@ -11,5 +11,5 @@ public interface Value<V> {
 
     Optional<DateTime> lastAccessed();
 
-    ConfigPropertyMetadata metadata();
+    PropertyMetadata metadata();
 }

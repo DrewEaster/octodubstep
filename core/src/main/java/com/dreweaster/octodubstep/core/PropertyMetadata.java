@@ -5,7 +5,7 @@ import com.dreweaster.octodubstep.core.source.PropertySource;
 
 /**
  */
-public interface ConfigPropertyMetadata {
+public interface PropertyMetadata {
 
     String name();
 

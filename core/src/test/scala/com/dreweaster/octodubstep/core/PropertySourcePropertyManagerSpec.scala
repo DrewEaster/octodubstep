@@ -4,9 +4,11 @@ import java.util
 
 import com.dreweaster.octodubstep.core.source.PropertySource
 import com.google.common.base.Optional
+import org.junit.runner.RunWith
 import org.mockito.Matchers._
 import org.mockito.Mockito
 import org.scalatest._
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.mock.MockitoSugar
 
 import scala.collection.JavaConversions._
@@ -14,7 +16,7 @@ import scala.collection.mutable.ListBuffer
 
 /**
   */
-//@RunWith(classOf[JUnitRunner])
+@RunWith(classOf[JUnitRunner])
 class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThen with BeforeAndAfter with Matchers with MockitoSugar {
 
   var propertySource: PropertySource = _
@@ -373,55 +375,55 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 }
 
 trait ConfigProviderWithString {
-  @ConfigProperty(name = "test.string.property", defaultValue = "testDefaultValue")
+  @Property(name = "test.string.property", defaultValue = "testDefaultValue")
   def testStringProperty: Value[String]
 }
 
 trait ConfigProviderWithNonRequiredString {
-  @ConfigProperty(name = "test.string.property", defaultValue = "default string", required = false)
+  @Property(name = "test.string.property", defaultValue = "default string", required = false)
   def testStringProperty: Value[String]
 }
 
 trait ConfigProviderWithInteger {
-  @ConfigProperty(name = "test.integer.property")
+  @Property(name = "test.integer.property")
   def testIntegerProperty: Value[Integer]
 }
 
 trait ConfigProviderWithStringList {
-  @ConfigProperty(name = "test.list.string.property", required = false, defaultValue = "four,five,six")
+  @Property(name = "test.list.string.property", required = false, defaultValue = "four,five,six")
   def testStringListProperty: Value[java.util.List[String]]
 }
 
 trait ConfigProviderWithDynamicConfigProperty {
 
-  @ConfigProperty(name = "test.string.property")
+  @Property(name = "test.string.property")
   def testStringProperty: DynamicValue[String]
 }
 
 trait ConfigProviderWithVariousProperties {
 
-  @ConfigProperty(name = "test.string.property")
+  @Property(name = "test.string.property")
   def testStringProperty: Value[String]
 
-  @ConfigProperty(name = "test.integer.property")
+  @Property(name = "test.integer.property")
   def testIntegerProperty: Value[Integer]
 
-  @ConfigProperty(name = "test.long.property")
+  @Property(name = "test.long.property")
   def testLongProperty: Value[java.lang.Long]
 
-  @ConfigProperty(name = "test.boolean.property")
+  @Property(name = "test.boolean.property")
   def testBooleanProperty: Value[java.lang.Boolean]
 
-  @ConfigProperty(name = "test.list.string.property")
+  @Property(name = "test.list.string.property")
   def testStringListProperty: Value[java.util.List[String]]
 
-  @ConfigProperty(name = "test.list.integer.property")
+  @Property(name = "test.list.integer.property")
   def testIntegerListProperty: Value[java.util.List[Integer]]
 
-  @ConfigProperty(name = "test.list.long.property")
+  @Property(name = "test.list.long.property")
   def testLongListProperty: Value[java.util.List[java.lang.Long]]
 
-  @ConfigProperty(name = "test.list.boolean.property")
+  @Property(name = "test.list.boolean.property")
   def testBooleanListProperty: Value[java.util.List[java.lang.Boolean]]
 }
 

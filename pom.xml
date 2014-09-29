@@ -85,6 +85,27 @@
                         <scalaVersion>${scala.version}</scalaVersion>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.scalatest</groupId>
+                    <artifactId>scalatest-maven-plugin</artifactId>
+                    <version>${scalatest.plugin.version}</version>
+                    <configuration>
+                        <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                        <junitxml>.</junitxml>
+                        <filereports>WDF ScalatestReport.txt</filereports>
+                        <htmlreporters>${project.build.directory}/html/scalatest</htmlreporters>
+                        <testFailureIgnore>false</testFailureIgnore>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -152,6 +173,13 @@
                 <version>${scalatest.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.pegdown</groupId>
+                <artifactId>pegdown</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
+            <!-- General dependencies -->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>

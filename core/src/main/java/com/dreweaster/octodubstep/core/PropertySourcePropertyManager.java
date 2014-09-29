@@ -55,7 +55,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
         for (Class<?> propertyProviderClass : propertyProviderClasses) {
 
             for (Method method : propertyProviderClass.getMethods()) {
-                ConfigProperty configProperty = method.getAnnotation(ConfigProperty.class);
+                Property configProperty = method.getAnnotation(Property.class);
                 if (configProperty != null) {
                     ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
                     Type type = parameterizedType.getActualTypeArguments()[0];
@@ -103,7 +103,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
     private void parsePropertyAsSimpleType(
             Map<String, Map.Entry<PropertySource, String>> properties,
             Method method,
-            ConfigProperty configProperty,
+            Property configProperty,
             boolean dynamic,
             Type type) {
         PropertyConverter<?> converter = converters.get(type);
@@ -138,7 +138,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
     private void parsePropertyAsList(
             Map<String, Map.Entry<PropertySource, String>> properties,
             Method method,
-            ConfigProperty configProperty,
+            Property configProperty,
             boolean dynamic,
             ParameterizedType embeddedParameterizedType) {
 
@@ -188,11 +188,11 @@ public class PropertySourcePropertyManager implements PropertyManager {
 
         private Optional<T> currentValue;
 
-        private ConfigPropertyMetadata metadata;
+        private PropertyMetadata metadata;
 
         private PropertySourceDynamicConfigPropertyValue(
                 Optional<T> currentValue,
-                ConfigProperty configProperty,
+                Property configProperty,
                 String type,
                 Optional<PropertySource> source,
                 boolean loadedFromDefaultValue) {
@@ -214,7 +214,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
         }
 
         @Override
-        public ConfigPropertyMetadata metadata() {
+        public PropertyMetadata metadata() {
             return metadata;
         }
 
@@ -238,11 +238,11 @@ public class PropertySourcePropertyManager implements PropertyManager {
 
         private Optional<T> currentValue;
 
-        private ConfigPropertyMetadata metadata;
+        private PropertyMetadata metadata;
 
         private PropertySourceConfigPropertyValue(
                 Optional<T> currentValue,
-                ConfigProperty configProperty,
+                Property configProperty,
                 String type,
                 Optional<PropertySource> source,
                 boolean loadedFromDefaultValue) {
@@ -264,7 +264,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
         }
 
         @Override
-        public ConfigPropertyMetadata metadata() {
+        public PropertyMetadata metadata() {
             return metadata;
         }
 
@@ -282,9 +282,9 @@ public class PropertySourcePropertyManager implements PropertyManager {
     /**
      * Represents metadata for a config property.
      */
-    private final class SimpleConfigPropertyMetadata implements ConfigPropertyMetadata {
+    private final class SimpleConfigPropertyMetadata implements PropertyMetadata {
 
-        private ConfigProperty configProperty;
+        private Property configProperty;
 
         private Optional<PropertySource> source;
 
@@ -295,7 +295,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
         private boolean loadedFromDefaultValue;
 
         private SimpleConfigPropertyMetadata(
-                ConfigProperty configProperty,
+                Property configProperty,
                 String type,
                 boolean dynamic,
                 Optional<PropertySource> source,

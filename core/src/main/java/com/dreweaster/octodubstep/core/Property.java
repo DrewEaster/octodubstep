@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ConfigProperty {
+public @interface Property {
 
     String name();
 
