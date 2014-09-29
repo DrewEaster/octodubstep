@@ -11,7 +11,7 @@ I couldn't think of a good name (usual for me) so went with pretty much the rand
 What is it?
 -----------
 
-Octodubstep is, in many ways, inspired by the limitations of the config property mechanisms in Spring (e.g. PropertyPlaceholderConfigurer, @Value annotations etc). Octodubstep introduces features such as type safe, annotation driven config interfaces, dynamic property reloading, DRY property usage, and a host of other goodies (more to come in the future!).
+Octodubstep is, in many ways, inspired by the limitations of the config property mechanisms in Spring (e.g. PropertyPlaceholderConfigurer, @Value annotations etc). Octodubstep introduces features such as type safe, annotation driven config interfaces, dynamic property reloading, DRY property usage, and a host of other goodies (more to come in the future!). On top of this, Octodubstep encourages config properties to be neatly structured into separate logical units.
 
 Documentation
 -------------
@@ -24,7 +24,7 @@ A short example
 
 For those who can't wait for the docs, this is just a very basic example of Octodubstep in use (in Java).
 
-Firstly, create an annotated configuration interface (Octodubstep will create instance automagically).
+Firstly, create an annotated configuration interface (Octodubstep will create instance automagically):
 ```java
 public interface MyConfigProperties {
   
@@ -39,6 +39,22 @@ public interface MyConfigProperties {
   
   @ConfigProperty(name = "my.dynamic.string.property")
   DynamicConfigPropertyValue<String> myDynamicStringProperty();
+}
+```
+Then, let's see how this can be used in other code:
+
+```java
+public class ConfigTester {
+  
+  private MyConfigProperties properties;
+  
+  public ConfigTest(ConfigPropertyManager manager) {
+    properties = manager.getConfigProvider(MyConfigProperties.class);
+  }
+  
+  public void doStuff() {
+    System.out.println(properties.myStringProperty());
+  }
 }
 ```
 
