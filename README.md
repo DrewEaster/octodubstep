@@ -53,7 +53,7 @@ public class ConfigTester {
   }
   
   public void doStuff() {
-    System.out.println(properties.myStringProperty());
+    System.out.println(properties.myStringProperty().currentValue());
   }
 }
 ```
