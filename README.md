@@ -62,7 +62,7 @@ public class ConfigTester {
 Can I use it?
 -------------
 
-I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-)
+I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-) So far, Octodubstep has been developed using TDD without any refactoring to improve the code iteratively, so it needs some work...
 
 License
 -------
