@@ -1,5 +1,5 @@
-Octodubstep
-===========
+Octodubstep (Alpha)
+===================
 
 A declarative, type safe configuration property management framework for the JVM. Written in Java but can be used in Scala applications too!
 
@@ -28,17 +28,17 @@ Firstly, create an annotated configuration interface (Octodubstep will create in
 ```java
 public interface MyConfigProperties {
   
-  @ConfigProperty(name = "my.string.property", defaultValue="foobar")
-  ConfigPropertyValue<String> myStringProperty();
+  @Property(name = "my.string.property", defaultValue="foobar")
+  Value<String> myStringProperty();
   
-  @ConfigProperty(name = "my.integer.property")
-  ConfigPropertyValue<Integer> myIntegerProperty();  
+  @Property(name = "my.integer.property")
+  Value<Integer> myIntegerProperty();  
   
-  @ConfigProperty(name = "my.list.property", required="true")
-  ConfigPropertyValue<List<String>> myListProperty();
+  @Property(name = "my.list.property", required="true")
+  Value<List<String>> myListProperty();
   
-  @ConfigProperty(name = "my.dynamic.string.property")
-  DynamicConfigPropertyValue<String> myDynamicStringProperty();
+  @Property(name = "my.dynamic.string.property")
+  DynamicValue<String> myDynamicStringProperty();
 }
 ```
 Then, let's see how this can be used in other code:
@@ -48,8 +48,8 @@ public class ConfigTester {
   
   private MyConfigProperties properties;
   
-  public ConfigTest(ConfigPropertyManager manager) {
-    properties = manager.getConfigProvider(MyConfigProperties.class);
+  public ConfigTest(PropertyManager manager) {
+    properties = manager.propertiesFor(MyConfigProperties.class);
   }
   
   public void doStuff() {
@@ -57,13 +57,17 @@ public class ConfigTester {
   }
 }
 ```
+Can I use it?
+-------------
+
+I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-)
 
 License
 -------
 
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright &copy; 2013 **[Andrew Easter](http://www.dreweaster.com/)**.
+Copyright &copy; 2014 **[Andrew Easter](http://www.dreweaster.com/)**.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 
