@@ -44,7 +44,6 @@ public interface MyConfigProperties {
 }
 ```
 Then, let's see how this can be used in other code:
-
 ```java
 public class ConfigTester {
   
@@ -56,6 +55,21 @@ public class ConfigTester {
   
   public void doStuff() {
     System.out.println(properties.myStringProperty().currentValue());
+  }
+}
+```
+Or, a slightly different pattern:
+```java
+public class ConfigTester {
+  
+  private Value<String> myStringProperty;
+  
+  public ConfigTest(PropertyManager manager) {
+    myStringProperty = manager.propertiesFor(MyConfigProperties.class).myStringProperty();
+  }
+  
+  public void doStuff() {
+    System.out.println(myStringProperty.currentValue());
   }
 }
 ```
