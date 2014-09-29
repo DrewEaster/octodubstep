@@ -24,7 +24,7 @@ I'm working hard on pretty thorough documentation - watch this space!
 A short example
 ---------------
 
-For those who can't wait for the docs, this is just a very basic example of Octodubstep in use (in Java).
+For those who can't wait for the docs, this is just a taster of Octodubstep in use (in Java).
 
 Firstly, create an annotated configuration interface (Octodubstep will create instance automagically):
 ```java
