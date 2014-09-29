@@ -96,7 +96,7 @@ public class PropertySourcePropertyManager implements PropertyManager {
 
 
     @Override
-    public <T> T getConfigProvider(Class<T> providerClass) {
+    public <T> T propertiesFor(Class<T> providerClass) {
         return (T) configProviders.get(providerClass);
     }
 

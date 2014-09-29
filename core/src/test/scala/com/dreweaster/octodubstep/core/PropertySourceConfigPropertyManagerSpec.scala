@@ -65,7 +65,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the properties from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithVariousProperties])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithVariousProperties])
 
     Then("the properties should be returned correctly")
     currentValueOf(configProvider.testStringProperty) should equal("testValue")
@@ -90,8 +90,8 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the properties from the providers")
     val manager = new PropertySourcePropertyManager(List(configProviderClass1, configProviderClass2), List(propertySource), defaultConverters)
-    val configProvider1 = manager.getConfigProvider(classOf[ConfigProviderWithString])
-    val configProvider2 = manager.getConfigProvider(classOf[ConfigProviderWithInteger])
+    val configProvider1 = manager.propertiesFor(classOf[ConfigProviderWithString])
+    val configProvider2 = manager.propertiesFor(classOf[ConfigProviderWithInteger])
 
     Then("the properties should be returned correctly")
     currentValueOf(configProvider1.testStringProperty) should equal("testValue")
@@ -114,7 +114,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource, alternativePropertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithString])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithString])
 
     Then("the property should be returned correctly")
     currentValueOf(configProvider.testStringProperty) should equal("testValueFromPropertySource1")
@@ -139,7 +139,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource, alternativePropertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithStringList])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithStringList])
 
     Then("the property should be returned correctly")
     currentValueOf(configProvider.testStringListProperty) should be (util.Arrays.asList("property","source", "1"))
@@ -157,7 +157,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(configProviderClass)
+    val configProvider = manager.propertiesFor(configProviderClass)
 
     Then("the property value should be the expected default value")
     currentValueOf(configProvider.testStringProperty) should be ("default string")
@@ -175,7 +175,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(configProviderClass)
+    val configProvider = manager.propertiesFor(configProviderClass)
 
     Then("the property value should be the expected default value")
     currentValueOf(configProvider.testStringListProperty) should be (util.Arrays.asList("four","five", "six"))
@@ -198,8 +198,8 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass1, configProviderClass2), List(propertySource), defaultConverters)
-    val configProvider1 = manager.getConfigProvider(classOf[ConfigProviderWithString])
-    val configProvider2 = manager.getConfigProvider(classOf[ConfigProviderWithStringList])
+    val configProvider1 = manager.propertiesFor(classOf[ConfigProviderWithString])
+    val configProvider2 = manager.propertiesFor(classOf[ConfigProviderWithStringList])
 
     Then("the property metadata name should be returned correctly")
     metadataNameOf(configProvider1.testStringProperty) should equal("test.string.property")
@@ -215,7 +215,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithString])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithString])
 
     Then("the property metadata type should be returned correctly")
     metadataTypeOf(configProvider.testStringProperty) should be("java.lang.String")
@@ -231,7 +231,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithStringList])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithStringList])
 
     Then("the property metadata type should be returned correctly")
     metadataTypeOf(configProvider.testStringListProperty) should equal("java.util.List<java.lang.String>")
@@ -249,8 +249,8 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the properties from the providers")
     val manager = new PropertySourcePropertyManager(List(configProviderClass1, configProviderClass2), List(propertySource), defaultConverters)
-    val configProvider1 = manager.getConfigProvider(configProviderClass1)
-    val configProvider2 = manager.getConfigProvider(configProviderClass2)
+    val configProvider1 = manager.propertiesFor(configProviderClass1)
+    val configProvider2 = manager.propertiesFor(configProviderClass2)
 
     Then("the property metadata for required state should be returned correctly")
     metadataRequiredOf(configProvider1.testStringProperty) should be(true)
@@ -266,7 +266,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(classOf[ConfigProviderWithDynamicConfigProperty])
+    val configProvider = manager.propertiesFor(classOf[ConfigProviderWithDynamicConfigProperty])
 
     Then("the property metadata type should be returned correctly")
     metadataTypeOf(configProvider.testStringProperty) should be("java.lang.String")
@@ -282,7 +282,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(configProviderClass)
+    val configProvider = manager.propertiesFor(configProviderClass)
 
     Then("the property metadata default value should be returned correctly")
     metadataDefaultValueOf(configProvider.testStringProperty) should equal("testDefaultValue")
@@ -297,7 +297,7 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the property metadata from the provider")
     val manager = new PropertySourcePropertyManager(List(configProviderClass), List(propertySource), defaultConverters)
-    val configProvider = manager.getConfigProvider(configProviderClass)
+    val configProvider = manager.propertiesFor(configProviderClass)
 
     Then("the property metadata default value should be returned correctly")
     metadataDefaultValueOf(configProvider.testStringListProperty) should equal("four,five,six")
@@ -314,8 +314,8 @@ class PropertySourceConfigPropertyManagerSpec extends FlatSpec with GivenWhenThe
 
     When("attempting to fetch the properties from the providers")
     val manager = new PropertySourcePropertyManager(List(configProviderClass1, configProviderClass2), List(propertySource, alternativePropertySource), defaultConverters)
-    val configProvider1 = manager.getConfigProvider(configProviderClass1)
-    val configProvider2 = manager.getConfigProvider(configProviderClass2)
+    val configProvider1 = manager.propertiesFor(configProviderClass1)
+    val configProvider2 = manager.propertiesFor(configProviderClass2)
 
     Then("the property metadata property sources should be returned correctly")
     metadataSourceDescriptionOf(configProvider1.testStringProperty) should equal("Property source 1")
