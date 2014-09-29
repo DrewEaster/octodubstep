@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  */
-public final class DefaultPropertySourceConfigPropertyManager extends PropertySourceConfigPropertyManager {
+public final class DefaultPropertySourcePropertyManager extends PropertySourcePropertyManager {
 
     private static final PropertyConverter<?>[] DEFAULT_CONVERTERS = {
             new StringConverter(),
@@ -21,7 +21,7 @@ public final class DefaultPropertySourceConfigPropertyManager extends PropertySo
             new BooleanConverter()
     };
 
-    public DefaultPropertySourceConfigPropertyManager(
+    public DefaultPropertySourcePropertyManager(
             List<Class<?>> propertyProviderClasses,
             List<PropertySource> propertySources) {
 

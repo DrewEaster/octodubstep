@@ -20,17 +20,17 @@ import java.util.Map;
 
 /**
  */
-public class PropertySourceConfigPropertyManager implements ConfigPropertyManager {
+public class PropertySourcePropertyManager implements PropertyManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PropertySourceConfigPropertyManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PropertySourcePropertyManager.class);
 
     private Map<Class<?>, Object> configProviders = new HashMap<Class<?>, Object>();
 
-    private Map<Method, ConfigPropertyValue<?>> configPropertyValues = new HashMap<Method, ConfigPropertyValue<?>>();
+    private Map<Method, Value<?>> configPropertyValues = new HashMap<Method, Value<?>>();
 
     private Map<Class<?>, PropertyConverter> converters = new HashMap<Class<?>, PropertyConverter>();
 
-    public PropertySourceConfigPropertyManager(
+    public PropertySourcePropertyManager(
             List<Class<?>> propertyProviderClasses,
             List<PropertySource> propertySources,
             List<PropertyConverter<?>> propertyConverters) {
@@ -65,14 +65,14 @@ public class PropertySourceConfigPropertyManager implements ConfigPropertyManage
                                 properties,
                                 method,
                                 configProperty,
-                                parameterizedType.getRawType().equals(DynamicConfigPropertyValue.class),
+                                parameterizedType.getRawType().equals(DynamicValue.class),
                                 embeddedParameterizedType);
                     } else {
                         parsePropertyAsSimpleType(
                                 properties,
                                 method,
                                 configProperty,
-                                parameterizedType.getRawType().equals(DynamicConfigPropertyValue.class),
+                                parameterizedType.getRawType().equals(DynamicValue.class),
                                 type);
                     }
                 }
@@ -90,7 +90,7 @@ public class PropertySourceConfigPropertyManager implements ConfigPropertyManage
     }
 
     @Override
-    public Iterable<ConfigPropertyValue<?>> properties() {
+    public Iterable<Value<?>> properties() {
         return configPropertyValues.values();
     }
 
@@ -180,11 +180,11 @@ public class PropertySourceConfigPropertyManager implements ConfigPropertyManage
     }
 
     /**
-     * Implementation of {@link DynamicConfigPropertyValue}
+     * Implementation of {@link DynamicValue}
      *
      * @param <T> the value type
      */
-    private final class PropertySourceDynamicConfigPropertyValue<T> implements DynamicConfigPropertyValue<T> {
+    private final class PropertySourceDynamicConfigPropertyValue<T> implements DynamicValue<T> {
 
         private Optional<T> currentValue;
 
@@ -219,22 +219,22 @@ public class PropertySourceConfigPropertyManager implements ConfigPropertyManage
         }
 
         @Override
-        public void addListener(ConfigPropertyValueListener<T> listener) {
+        public void addListener(ValueListener<T> listener) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public void removeListener(ConfigPropertyValueListener<T> listener) {
+        public void removeListener(ValueListener<T> listener) {
             throw new UnsupportedOperationException();
         }
     }
 
     /**
-     * Implementation of {@link ConfigPropertyValue}
+     * Implementation of {@link Value}
      *
      * @param <T> the value type
      */
-    private final class PropertySourceConfigPropertyValue<T> implements ConfigPropertyValue<T> {
+    private final class PropertySourceConfigPropertyValue<T> implements Value<T> {
 
         private Optional<T> currentValue;
 

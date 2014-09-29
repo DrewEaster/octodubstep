@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 
 /**
  */
-public interface ConfigPropertyValue<V> {
+public interface Value<V> {
 
     Optional<V> currentValue();
 

@@ -2,10 +2,10 @@ package com.dreweaster.octodubstep.core;
 
 /**
  */
-public interface ConfigPropertyManager {
+public interface PropertyManager {
 
     <T> T getConfigProvider(Class<T> providerClass);
 
-    Iterable<ConfigPropertyValue<?>> properties();
+    Iterable<Value<?>> properties();
 }
 
