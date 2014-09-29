@@ -1,4 +1,4 @@
 octodubstep
 ===========
 
-Octodubstep is a typesafe configuration property management framework for the JVM
+Octodubstep is a declarative, type safe configuration property management framework for the JVM
