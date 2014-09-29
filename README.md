@@ -28,16 +28,16 @@ Firstly, create an annotated configuration interface (Octodubstep will create in
 ```java
 public interface MyConfigProperties {
   
-  @ConfigProperty(name = "my.string.property", defaultValue="foobar")
+  @Property(name = "my.string.property", defaultValue="foobar")
   Value<String> myStringProperty();
   
-  @ConfigProperty(name = "my.integer.property")
+  @Property(name = "my.integer.property")
   Value<Integer> myIntegerProperty();  
   
-  @ConfigProperty(name = "my.list.property", required="true")
+  @Property(name = "my.list.property", required="true")
   Value<List<String>> myListProperty();
   
-  @ConfigProperty(name = "my.dynamic.string.property")
+  @Property(name = "my.dynamic.string.property")
   DynamicValue<String> myDynamicStringProperty();
 }
 ```
