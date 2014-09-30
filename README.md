@@ -49,7 +49,7 @@ public class ConfigTester {
 
   static {
     Octodubstep.installProvider(MyConfigProperties.class);
-    Octodubstep.installPropertySource(new PropertiesFileSource(JavaIOExternalFile.create("/path/to/props.properties");
+    Octodubstep.installPropertySource(PropertiesFileSource.create("/path/to/props.properties"));
     Octodubstep.installDefaultConverters();
   }
   
@@ -70,7 +70,7 @@ public class ConfigTester {
 
   static {
     Octodubstep.installProvider(MyConfigProperties.class);
-    Octodubstep.installPropertySource(new PropertiesFileSource(JavaIOExternalFile.create("/path/to/props.properties");
+    Octodubstep.installPropertySource(PropertiesFileSource.create("/path/to/props.properties"));
     Octodubstep.installDefaultConverters();
   }
   
