@@ -13,7 +13,7 @@ I couldn't think of a good name (usual for me) so went with pretty much the rand
 What is it?
 -----------
 
-Octodubstep is, in many ways, inspired by the limitations of the config property mechanisms in Spring (e.g. PropertyPlaceholderConfigurer, @Value annotations etc). Octodubstep introduces features such as type safe, annotation driven config interfaces, dynamic property reloading, DRY default value definitions, and a host of other goodies (more to come in the future!). On top of this, Octodubstep encourages config properties to be neatly structured into separate logical units.
+Octodubstep is, in many ways, inspired by the limitations of the config property mechanisms in Spring (e.g. PropertyPlaceholderConfigurer, @Value annotations etc). Octodubstep introduces features such as type safe, annotation driven config interfaces, dynamic property reloading, DRY default value definitions, and a host of other goodies (more to come in the future!). On top of this, Octodubstep encourages config properties to be neatly structured into separate logical units (following a similar pattern to the way beans are configured in the Spring JavaConfig approach).
 
 Documentation
 -------------
