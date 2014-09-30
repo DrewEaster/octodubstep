@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/DrewEaster/octodubstep.svg?branch=master)](https://travis-ci.org/DrewEaster/octodubstep)
+
 Octodubstep (Alpha)
 ===================
 
@@ -22,7 +24,7 @@ I'm working hard on pretty thorough documentation - watch this space!
 A short example
 ---------------
 
-For those who can't wait for the docs, this is just a very basic example of Octodubstep in use (in Java).
+For those who can't wait for the docs, this is just a taster of Octodubstep in use (in Java).
 
 Firstly, create an annotated configuration interface (Octodubstep will create instance automagically):
 ```java
@@ -42,14 +44,20 @@ public interface MyConfigProperties {
 }
 ```
 Then, let's see how this can be used in other code:
-
 ```java
 public class ConfigTester {
+
+  public static PropertyManager propertyManager =
+          Octodubstep.newPropertyManager()
+                  .withPropertySource(PropertiesFileSource.create("/path/to/props.properties"))
+                  .withProvider(MyConfigProperties.class)
+                  .usingDefaultConverters()
+                  .build();
   
   private MyConfigProperties properties;
   
-  public ConfigTest(PropertyManager manager) {
-    properties = manager.propertiesFor(MyConfigProperties.class);
+  public ConfigTest() {
+    properties = propertyManager.propertiesFor(MyConfigProperties.class);
   }
   
   public void doStuff() {
@@ -57,10 +65,32 @@ public class ConfigTester {
   }
 }
 ```
+Or, a slightly different pattern:
+```java
+public class ConfigTester {
+
+  public static PropertyManager propertyManager =
+          Octodubstep.newPropertyManager()
+                  .withPropertySource(PropertiesFileSource.create("/path/to/props.properties"))
+                  .withProvider(MyConfigProperties.class)
+                  .usingDefaultConverters()
+                  .build();
+  
+  private Value<String> myStringProperty;
+  
+  public ConfigTest(PropertyManager manager) {
+    myStringProperty = propertyManager.propertiesFor(MyConfigProperties.class).myStringProperty();
+  }
+  
+  public void doStuff() {
+    System.out.println(myStringProperty.currentValue());
+  }
+}
+```
 Can I use it?
 -------------
 
-I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-)
+I'm just sorting out release configuration and then you'll be free to use it in your own applications. But it will still be in 'alpha' state :-) So far, Octodubstep has been developed using TDD without any refactoring to improve the code iteratively, so it needs some work...
 
 License
 -------
