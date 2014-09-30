@@ -87,6 +87,33 @@ public class ConfigTester {
   }
 }
 ```
+And a sneak peek at what dynamic reloading might look like - when it's implemented fully ;-)
+```java
+public class ConfigTester {
+
+  public static PropertyManager propertyManager =
+          Octodubstep.newPropertyManager()
+                  .withPropertySource(PropertiesFileSource.create("/path/to/props.properties"))
+                  .withProvider(MyConfigProperties.class)
+                  .usingDefaultConverters()
+                  .build();
+  
+  private Value<String> myStringProperty;
+  
+  public ConfigTester() {
+    myStringProperty = propertyManager.propertiesFor(MyConfigProperties.class).myStringProperty();
+    myStringProperty.addListener(new ValueListener<String>() {
+            public void valueChanged(String oldValue, String newValue) {
+              System.out.println("Value has changed to " + newValue);  
+            }
+        });
+  }
+  
+  public void doStuff() {
+    System.out.println(myStringProperty.currentValue());
+  }
+}
+```
 Can I use it?
 -------------
 
