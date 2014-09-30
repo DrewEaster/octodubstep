@@ -102,6 +102,7 @@ public class ConfigTester {
   
   public ConfigTester() {
     myStringProperty = propertyManager.propertiesFor(MyConfigProperties.class).myStringProperty();
+    
     myStringProperty.addListener(new ValueListener<String>() {
             public void valueChanged(String oldValue, String newValue) {
               System.out.println("Value has changed to " + newValue);  
