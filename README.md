@@ -46,11 +46,17 @@ public interface MyConfigProperties {
 Then, let's see how this can be used in other code:
 ```java
 public class ConfigTester {
+
+  static {
+    Octodubstep.installProvider(MyConfigProperties.class);
+    Octodubstep.installPropertySource(new PropertiesFileSource(JavaIOExternalFile.create("/path/to/props.properties");
+    Octodubstep.installDefaultConverters();
+  }
   
   private MyConfigProperties properties;
   
-  public ConfigTest(PropertyManager manager) {
-    properties = manager.propertiesFor(MyConfigProperties.class);
+  public ConfigTest() {
+    properties = Octodubstep.propertyManager().propertiesFor(MyConfigProperties.class);
   }
   
   public void doStuff() {
@@ -61,11 +67,17 @@ public class ConfigTester {
 Or, a slightly different pattern:
 ```java
 public class ConfigTester {
+
+  static {
+    Octodubstep.installProvider(MyConfigProperties.class);
+    Octodubstep.installPropertySource(new PropertiesFileSource(JavaIOExternalFile.create("/path/to/props.properties");
+    Octodubstep.installDefaultConverters();
+  }
   
   private Value<String> myStringProperty;
   
   public ConfigTest(PropertyManager manager) {
-    myStringProperty = manager.propertiesFor(MyConfigProperties.class).myStringProperty();
+    myStringProperty = Octodubstep.propertyManager().propertiesFor(MyConfigProperties.class).myStringProperty();
   }
   
   public void doStuff() {
