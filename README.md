@@ -56,7 +56,7 @@ public class ConfigTester {
   
   private MyConfigProperties properties;
   
-  public ConfigTest() {
+  public ConfigTester() {
     properties = propertyManager.propertiesFor(MyConfigProperties.class);
   }
   
@@ -78,7 +78,7 @@ public class ConfigTester {
   
   private Value<String> myStringProperty;
   
-  public ConfigTest(PropertyManager manager) {
+  public ConfigTester() {
     myStringProperty = propertyManager.propertiesFor(MyConfigProperties.class).myStringProperty();
   }
   
