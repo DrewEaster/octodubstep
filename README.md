@@ -47,16 +47,17 @@ Then, let's see how this can be used in other code:
 ```java
 public class ConfigTester {
 
-  static {
-    Octodubstep.installProvider(MyConfigProperties.class);
-    Octodubstep.installPropertySource(PropertiesFileSource.create("/path/to/props.properties"));
-    Octodubstep.installDefaultConverters();
-  }
+  public static PropertyManager propertyManager =
+          Octodubstep.newPropertyManager()
+                  .withPropertySource(PropertiesFileSource.create("/path/to/props.properties"))
+                  .withProvider(MyConfigProperties.class)
+                  .usingDefaultConverters()
+                  .build();
   
   private MyConfigProperties properties;
   
   public ConfigTest() {
-    properties = Octodubstep.propertyManager().propertiesFor(MyConfigProperties.class);
+    properties = propertyManager.propertiesFor(MyConfigProperties.class);
   }
   
   public void doStuff() {
@@ -68,16 +69,17 @@ Or, a slightly different pattern:
 ```java
 public class ConfigTester {
 
-  static {
-    Octodubstep.installProvider(MyConfigProperties.class);
-    Octodubstep.installPropertySource(PropertiesFileSource.create("/path/to/props.properties"));
-    Octodubstep.installDefaultConverters();
-  }
+  public static PropertyManager propertyManager =
+          Octodubstep.newPropertyManager()
+                  .withPropertySource(PropertiesFileSource.create("/path/to/props.properties"))
+                  .withProvider(MyConfigProperties.class)
+                  .usingDefaultConverters()
+                  .build();
   
   private Value<String> myStringProperty;
   
   public ConfigTest(PropertyManager manager) {
-    myStringProperty = Octodubstep.propertyManager().propertiesFor(MyConfigProperties.class).myStringProperty();
+    myStringProperty = propertyManager.propertiesFor(MyConfigProperties.class).myStringProperty();
   }
   
   public void doStuff() {
