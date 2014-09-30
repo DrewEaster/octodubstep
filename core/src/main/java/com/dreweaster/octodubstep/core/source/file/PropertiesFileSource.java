@@ -4,13 +4,18 @@ import com.google.common.base.Optional;
 import com.dreweaster.octodubstep.core.source.PropertySource;
 import com.dreweaster.octodubstep.core.source.PropertySourceListener;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 /**
  */
-public final class PropertiesFileBasedPropertySource implements PropertySource {
+public final class PropertiesFileSource implements PropertySource {
+
+    public static PropertySource create(String path) throws IOException {
+        return new PropertiesFileSource(JavaIOExternalFile.create(path));
+    }
 
     private ExternalFile externalFile;
 
@@ -22,7 +27,7 @@ public final class PropertiesFileBasedPropertySource implements PropertySource {
      * @param externalFile
      * @throws IOException
      */
-    public PropertiesFileBasedPropertySource(ExternalFile externalFile) throws IOException {
+    public PropertiesFileSource(ExternalFile externalFile) throws IOException {
         this.externalFile = externalFile;
         this.properties = new Properties();
         loadProperties();

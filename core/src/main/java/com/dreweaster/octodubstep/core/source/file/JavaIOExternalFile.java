@@ -9,6 +9,10 @@ import java.io.InputStream;
  */
 public final class JavaIOExternalFile implements ExternalFile {
 
+    public static ExternalFile create(String path) {
+        return new JavaIOExternalFile(new File(path));
+    }
+
     private File file;
 
     public JavaIOExternalFile(File file) {
